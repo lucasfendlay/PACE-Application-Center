@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Client Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="notes.css">
+    <style>
+.button-container {
+        display: flex;
+        gap: 10px; /* Adds spacing between buttons */
+        flex-wrap: wrap; /* Ensures buttons wrap to the next line if needed */
+    }
+
+    .button-container button {
+        flex: 1; /* Ensures buttons are evenly spaced */
+        padding: 10px 15px;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="button container">
+    <button id="household-view-button" class="interactive" onclick="GoToHouseholdEdit()">Household</button>
+        <button id="relationships-edit-button" class="interactive">Relationships</button>
+        <button id="current-enrollments-view-button" class="interactive" onclick="goToCRedit()">Current Enrollments</button>
+        <button id="income-view-button" class="interactive" onclick="GoToIncomeedit()">Income</button>
+        <button id="assets-view-button" class="interactive" onclick="goToAssetsedit()">Assets</button>
+        <button id="expenses-view-button" class="interactive" onclick="goToExpensesedit()">Expenses</button>
+        <button id="estimations-view-button" class="interactive" onclick="gotoEstimations()">Estimations</button>
+        <button id="referrals-view-button" onclick="goToReferrals()" class="interactive">Referrals</button>
+        </div>
+    <h1>Edit Client Profile</h1>
+    <div id="notes-list"></div>
+    <textarea id="note-input" placeholder="Write your note here..."></textarea>
+    <button id="save-note">Save</button>
+    <button type="button" onclick="terminateClient()">Terminate</button>
+    <form id="clientProfileForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+        
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+        
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required><br><br>
+        
+        <label for="streetAddress">Street Address:</label>
+        <input type="text" id="streetAddress" name="streetAddress" required><br><br>
+        
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+        
+        <label for="state">State:</label>
+        <select id="state" name="state" required><br><br>
+            <option value="PA" selected>PA</option>
+            <option value="AL">AL</option>
+            <option value="AK">AK</option>
+            <option value="AZ">AZ</option>
+            <option value="AR">AR</option>
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option value="CT">CT</option>
+            <option value="DC">DC</option>
+            <option value="DE">DE</option>
+            <option value="FL">FL</option>
+            <option value="GA">GA</option>
+            <option value="HI">HI</option>
+            <option value="ID">ID</option>
+            <option value="IL">IL</option>
+            <option value="IN">IN</option>
+            <option value="IA">IA</option>
+            <option value="KS">KS</option>
+            <option value="KY">KY</option>
+            <option value="LA">LA</option>
+            <option value="ME">ME</option>
+            <option value="MD">MD</option>
+            <option value="MA">MA</option>
+            <option value="MI">MI</option>
+            <option value="MN">MN</option>
+            <option value="MS">MS</option>
+            <option value="MO">MO</option>
+            <option value="MT">MT</option>
+            <option value="NE">NE</option>
+            <option value="NV">NV</option>
+            <option value="NH">NH</option>
+            <option value="NJ">NJ</option>
+            <option value="NM">NM</option>
+            <option value="NY">NY</option>
+            <option value="NC">NC</option>
+            <option value="ND">ND</option>
+            <option value="OH">OH</option>
+            <option value="OK">OK</option>
+            <option value="OR">OR</option>
+            <option value="RI">RI</option>
+            <option value="SC">SC</option>
+            <option value="SD">SD</option>
+            <option value="TN">TN</option> 
+            <option value="TX">TX</option>
+            <option value="UT">UT</option>
+            <option value="VT">VT</option>
+            <option value="VA">VA</option>
+            <option value="WA">WA</option>
+            <option value="WV">WV</option>
+            <option value="WI">WI</option>
+            <option value="WY">WY</option>
+            </select>
+        
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" name="zipCode" required><br><br>
+        
+        <label for="county">County:</label>
+        <select id="county" name="county" required><br><br>
+            <option value="Adams">Adams</option>
+            <option value="Allegheny">Allegheny</option>
+            <option value="Armstrong">Armstrong</option>
+            <option value="Beaver">Beaver</option>
+            <option value="Bedford">Bedford</option>
+            <option value="Berks">Berks</option>
+            <option value="Blair">Blair</option>
+            <option value="Bradford">Bradford</option>
+            <option value="Bucks">Bucks</option>
+            <option value="Butler">Butler</option>
+            <option value="Cambria">Cambria</option>
+            <option value="Cameron">Cameron</option>
+            <option value="Carbon">Carbon</option>
+            <option value="Centre">Centre</option>
+            <option value="Chester">Chester</option>
+            <option value="Clarion">Clarion</option>
+            <option value="Clearfield">Clearfield</option>
+            <option value="Clinton">Clinton</option>
+            <option value="Columbia">Columbia</option>
+            <option value="Crawford">Crawford</option>
+            <option value="Cumberland">Cumberland</option>
+            <option value="Dauphin">Dauphin</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Elk">Elk</option>
+            <option value="Erie">Erie</option>
+            <option value="Fayette">Fayette</option>
+            <option value="Forest">Forest</option>
+            <option value="Franklin">Franklin</option>
+            <option value="Fulton">Fulton</option>
+            <option value="Greene">Greene</option>
+            <option value="Huntingdon">Huntingdon</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Jefferson">Jefferson</option>
+            <option value="Juniata">Juniata</option>
+            <option value="Lackawanna">Lackawanna</option>
+            <option value="Lancaster">Lancaster</option>
+            <option value="Lawrence">Lawrence</option>
+            <option value="Lebanon">Lebanon</option>
+            <option value="Lehigh">Lehigh</option>
+            <option value="Luzerne">Luzerne</option>
+            <option value="Lycoming">Lycoming</option>
+            <option value="McKean">McKean</option>
+            <option value="Monroe">Monroe</option>
+            <option value="Montgomery">Montgomery</option>
+            <option value="Montour">Montour</option>
+            <option value="Northampton">Northampton</option>
+            <option value="Northumberland">Northumberland</option>
+            <option value="Perry">Perry</option>
+            <option value="Philadelphia">Philadelphia</option>
+            <option value="Pike">Pike</option>
+            <option value="Potter">Potter</option>
+            <option value="Schuylkill">Schuylkill</option>
+            <option value="Snyder">Snyder</option>
+            <option value="Somerset">Somerset</option>
+            <option value="Sullivan">Sullivan</option>
+            <option value="Susquehanna">Susquehanna</option>
+            <option value="Tioga">Tioga</option>
+            <option value="Union">Union</option>
+            <option value="Venango">Venango</option>
+            <option value="Warren">Warren</option>
+            <option value="Washington">Washington</option>
+            <option value="Wayne">Wayne</option>
+            <option value="Westmoreland">Westmoreland</option>
+            <option value="Wyoming">Wyoming</option>
+            <option value="York">York</option>
+        </select><br><br>
+
+        <label for="speakingLanguage">Preferred Speaking Language:</label>
+        <select id="speakingLanguage" name="speakingLanguage" onchange="updateSpeakingLanguage()">
+            <option value="" disabled>Select Language</option>
+            <option value="English">English</option>
+            <option value="American Sign Language" selected>American Sign Language</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Bengali">Bengali</option>
+            <option value="Czech">Czech</option>
+            <option value="Danish">Danish</option>
+            <option value="Dutch">Dutch</option>
+            <option value="Finnish">Finnish</option>
+            <option value="French">French</option>
+            <option value="German">German</option>
+            <option value="Greek">Greek</option>
+            <option value="Hebrew">Hebrew</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Hungarian">Hungarian</option>
+            <option value="Italian">Italian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Korean">Korean</option>
+            <option value="Mandarin">Mandarin</option>
+            <option value="Norwegian">Norwegian</option>
+            <option value="Other">Other</option>
+            <option value="Persian">Persian</option>
+            <option value="Polish">Polish</option>
+            <option value="Portuguese">Portuguese</option>
+            <option value="Romanian">Romanian</option>
+            <option value="Russian">Russian</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Swahili">Swahili</option>
+            <option value="Swedish">Swedish</option>
+            <option value="Tagalog">Tagalog</option>
+            <option value="Thai">Thai</option>
+            <option value="Turkish">Turkish</option>
+            <option value="Urdu">Urdu</option>
+            <option value="Vietnamese">Vietnamese</option>
+        </select>
+
+        <div class="selection-box">
+            <label id="intepretor-label">Did you use a language interpreter?</label>
+            <div id="interpretor-yes" data-value="yes" onclick="updateInterpreter('yes')">Yes</div>
+            <div id="interpretor-no" data-value="no" onclick="updateInterpreter('no')">No</div>
+        </div>
+        
+        <button type="button" onclick="saveClient()">Save and Release Profile</button>
+        <button type="button" onclick="validateAndStartScreening()">Start Screening</button>
+    </form>
+    <h2>Interaction Tracker</h2>
+    <ul id="interactionList"></ul>
+    <script>
+
+function updateSpeakingLanguage() {
+    const clientId = getQueryParam('id');
+    const selectedLanguage = document.getElementById('speakingLanguage').value;
+
+    let clients = JSON.parse(localStorage.getItem('clients')) || [];
+    const clientIndex = clients.findIndex(c => c.id === clientId);
+
+    if (clientIndex !== -1) {
+        clients[clientIndex].speakingLanguage = selectedLanguage; // Update the speakingLanguage field
+        localStorage.setItem('clients', JSON.stringify(clients)); // Save updated clients array to local storage
+        console.log(`Updated speakingLanguage for client ID ${clientId} to ${selectedLanguage}`);
+    } else {
+        console.error('Client not found');
+    }
+}
+        // Function to get query parameter by name
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+    
+        // Function to get the currently logged-in username
+        function getLoggedInUsername() {
+            // Replace this with the actual logic to get the logged-in username
+            return localStorage.getItem('loggedInUsername') || 'Unknown User';
+        }
+    
+        // Load client data on page load
+        window.onload = function() {
+            const clientId = getQueryParam('id');
+            const clients = JSON.parse(localStorage.getItem('clients')) || [];
+            const client = clients.find(c => c.id === clientId);
+    
+            if (client) {
+                if (client.firstName) {
+                    document.getElementById('firstName').value = client.firstName;
+                    document.getElementById('lastName').value = client.lastName;
+                    document.getElementById('phoneNumber').value = client.phoneNumber;
+                    document.getElementById('streetAddress').value = client.streetAddress;
+                    document.getElementById('city').value = client.city;
+                    document.getElementById('state').value = client.state;
+                    document.getElementById('zipCode').value = client.zipCode;
+                    document.getElementById('county').value = client.county;
+                } else if (client.callLogs && client.callLogs.length > 0) {
+                    const latestCall = client.callLogs[client.callLogs.length - 1];
+                    if (latestCall.reasonForCall === 'To Apply Myself for Public Benefits') {
+                        document.getElementById('firstName').value = latestCall.callerFirstName;
+                        document.getElementById('lastName').value = latestCall.callerLastName;
+                        document.getElementById('phoneNumber').value = latestCall.callerPhoneNumber;
+                    }
+                }
+    
+                const interactionList = document.getElementById('interactionList');
+                interactionList.innerHTML = '';
+                if (client.callLogs) {
+                    client.callLogs.forEach(log => {
+                        if (log) {
+                            const li = document.createElement('li');
+                            li.textContent = `${log.agent || ''} - ${log.timestamp || ''} - ${log.callerFirstName || ''} ${log.callerLastName || ''} - ${log.callerPhoneNumber || ''} - ${log.callDirection || ''} - ${log.reasonForCall || ''} - ${log.referralSource || ''}`;
+                            interactionList.appendChild(li);
+                        }
+                    });
+                }
+            } else {
+                alert('Client not found');
+            }
+        }
+    
+    // Save client data, including selected speaking language and interpreter usage
+    function saveClient() {
+        const clientId = getQueryParam('id');
+        let clients = JSON.parse(localStorage.getItem('clients')) || [];
+        const clientIndex = clients.findIndex(c => c.id === clientId);
+
+        if (clientIndex !== -1) {
+            const existingClient = clients[clientIndex];
+            clients[clientIndex] = {
+                ...existingClient,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                streetAddress: document.getElementById('streetAddress').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zipCode: document.getElementById('zipCode').value,
+                county: document.getElementById('county').value,
+                speakingLanguage: document.getElementById('speakingLanguage').value, // Save selected language
+                interpreterUsed: document.querySelector('.selection-box div.selected')?.dataset.value || null // Save interpreter selection
+            };
+            localStorage.setItem('clients', JSON.stringify(clients));
+            window.location.href = 'profileview.html?id=' + clientId;
+        } else {
+            alert('Client not found');
+        }
+    }
+
+    // Load client data on page load, including selected speaking language and interpreter usage
+    window.onload = function() {
+        const clientId = getQueryParam('id');
+        const clients = JSON.parse(localStorage.getItem('clients')) || [];
+        const client = clients.find(c => c.id === clientId);
+
+        if (client) {
+            if (client.firstName) {
+                document.getElementById('firstName').value = client.firstName;
+                document.getElementById('lastName').value = client.lastName;
+                document.getElementById('phoneNumber').value = client.phoneNumber;
+                document.getElementById('streetAddress').value = client.streetAddress;
+                document.getElementById('city').value = client.city;
+                document.getElementById('state').value = client.state;
+                document.getElementById('zipCode').value = client.zipCode;
+                document.getElementById('county').value = client.county;
+            }
+
+            // Recall selected speaking language
+            if (client.speakingLanguage) {
+                document.getElementById('speakingLanguage').value = client.speakingLanguage;
+            }
+
+            // Recall interpreter usage
+            if (client.interpreterUsed) {
+                const selectedInterpreter = document.querySelector(`.selection-box div[data-value="${client.interpreterUsed}"]`);
+                if (selectedInterpreter) {
+                    selectedInterpreter.classList.add('selected');
+                }
+            }
+        } else {
+            alert('Client not found');
+        }
+    };
+
+    // Add click event listeners to interpreter selection buttons
+    document.querySelectorAll('.selection-box div').forEach(div => {
+        div.addEventListener('click', function() {
+            document.querySelectorAll('.selection-box div').forEach(d => d.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+
+    
+        // Validate form fields and start screening
+        function validateAndStartScreening() {
+            const requiredFields = ['firstName', 'lastName', 'phoneNumber', 'streetAddress', 'city', 'state', 'zipCode', 'county'];
+            let allFieldsFilled = true;
+    
+            requiredFields.forEach(field => {
+                if (!document.getElementById(field).value) {
+                    allFieldsFilled = false;
+                }
+            });
+    
+            if (allFieldsFilled) {
+                if (confirm('Are you sure you want to start a new screening? This action cannot be undone.')) {
+                    saveClient();
+                    const clientId = getQueryParam('id');
+                    addScreeningNote();
+                    window.location.href = 'householdedit.html?id=' + clientId;
+                }
+            } else {
+                alert('Please fill in all required fields before starting the screening.');
+            }
+        }
+
+    // Add a note indicating a new screening has been initiated
+    function addScreeningNote() {
+        const notesList = document.getElementById('notes-list');
+        const activeUser = sessionStorage.getItem('activeUser');
+        if (!activeUser) {
+            alert('Active user not found. Please log in again.');
+            return;
+        }
+        const timestamp = new Date().toLocaleString();
+        const noteText = `New screening initiated.`;
+
+        const noteElement = document.createElement('div');
+        noteElement.textContent = noteText;
+        notesList.appendChild(noteElement);
+
+        // Save the note to localStorage
+        const clientId = getQueryParam('id');
+        let clients = JSON.parse(localStorage.getItem('clients')) || [];
+        const clientIndex = clients.findIndex(c => c.id === clientId);
+
+        if (clientIndex !== -1) {
+            const existingClient = clients[clientIndex];
+            if (!existingClient.notes) {
+                existingClient.notes = [];
+            }
+            existingClient.notes.push({ text: noteText, timestamp: timestamp, username: activeUser });
+            localStorage.setItem('clients', JSON.stringify(clients));
+        } else {
+            alert('Client not found');
+        }
+    }
+    
+        // Terminate client profile
+        function terminateClient() {
+            if (confirm('Are you sure you want to terminate this client? This action cannot be undone.')) {
+                const clientId = getQueryParam('id');
+                let clients = JSON.parse(localStorage.getItem('clients')) || [];
+                const clientIndex = clients.findIndex(c => c.id === clientId);
+    
+                if (clientIndex !== -1) {
+                    clients.splice(clientIndex, 1);
+                    localStorage.setItem('clients', JSON.stringify(clients));
+                    window.location.href = 'directory.html';
+                } else {
+                    alert('Client not found');
+                }
+            }
+        }
+
+        function GoToHouseholdEdit() {
+        const clientId = getQueryParameter('id');
+        if (clientId) {
+            window.location.href = `householdedit.html?id=${clientId}`;
+        } else {
+            console.error('Client ID not found in query parameters.');
+        }
+    }
+     
+    function goToCRedit() {
+        const clientId = getQueryParameter('id');
+        if (clientId) {
+            window.location.href = `currentenrollmentsedit.html?id=${clientId}`;
+        } else {
+            console.error('Client ID not found in query parameters.');
+        }
+    }
+
+    function GoToIncomeedit() {
+            const clientId = getQueryParameter('id');
+            console.log(`Retrieved clientId from query parameters: ${clientId}`);
+            if (clientId) {
+                console.log(`Redirecting to currentenrollmentsview.html with clientId: ${clientId}`);
+                window.location.href = `incomeedit.html?id=${clientId}`;
+            } else {
+                console.error('Client ID not found in query parameters.');
+            }
+        }
+
+        function goToAssetsedit() {
+            const clientId = getQueryParameter('id');
+            console.log(`Retrieved clientId from query parameters: ${clientId}`);
+            if (clientId) {
+                console.log(`Redirecting to currentenrollmentsview.html with clientId: ${clientId}`);
+                window.location.href = `assetsedit.html?id=${clientId}`;
+            } else {
+                console.error('Client ID not found in query parameters.');
+            }
+        }
+
+        function goToExpensesedit() {
+            const clientId = getQueryParameter('id');
+            console.log(`Retrieved clientId from query parameters: ${clientId}`);
+            if (clientId) {
+                console.log(`Redirecting to currentenrollmentsview.html with clientId: ${clientId}`);
+                window.location.href = `expensesedit.html?id=${clientId}`;
+            } else {
+                console.error('Client ID not found in query parameters.');
+            }
+        }
+
+        document.getElementById('relationships-edit-button').addEventListener('click', function() {
+            const clientId = getQueryParameter('id');
+            if (clientId) {
+                window.location.href = `relationshipsedit.html?id=${clientId}`;
+            } else {
+                console.error('Client ID not found in query parameters.');
+            }
+        });
+
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function goToReferrals() {
+            const clientId = getQueryParameter('id');
+            console.log(`Retrieved clientId from query parameters: ${clientId}`);
+            if (clientId) {
+                console.log(`Redirecting to currentenrollmentsview.html with clientId: ${clientId}`);
+                window.location.href = `referralsedit.html?id=${clientId}`;
+            } else {
+                console.error('Client ID not found in query parameters.');
+            }
+        }
+
+        function gotoEstimations() {
+            const clientId = getQueryParameter('id');
+            console.log(`Retrieved clientId from query parameters: ${clientId}`);
+            if (clientId) {
+                console.log(`Redirecting to currentenrollmentsview.html with clientId: ${clientId}`);
+                window.location.href = `estimationsedit.html?id=${clientId}`;
+            } else {
+                console.error('Client ID not found in query parameters.');
+            }
+        }
+
+        function updateInterpreter(value) {
+    const clientId = getQueryParam('id');
+    let clients = JSON.parse(localStorage.getItem('clients')) || [];
+    const clientIndex = clients.findIndex(c => c.id === clientId);
+
+    if (clientIndex !== -1) {
+        clients[clientIndex].interpreter = value; // Update the interpreter field
+        localStorage.setItem('clients', JSON.stringify(clients)); // Save updated clients array to local storage
+
+        // Update UI to reflect the selected option
+        document.querySelectorAll('.selection-box div').forEach(div => div.classList.remove('selected'));
+        document.querySelector(`.selection-box div[data-value="${value}"]`).classList.add('selected');
+
+        console.log(`Updated interpreter for client ID ${clientId} to ${value}`);
+    } else {
+        console.error('Client not found');
+    }
+}
+
+window.onload = function () {
+    const clientId = getQueryParam('id');
+    const clients = JSON.parse(localStorage.getItem('clients')) || [];
+    const client = clients.find(c => c.id === clientId);
+
+    if (client) {
+        // Recall interpreter usage
+        if (client.interpreter) {
+            const selectedInterpreter = document.querySelector(`.selection-box div[data-value="${client.interpreter}"]`);
+            if (selectedInterpreter) {
+                selectedInterpreter.classList.add('selected');
+            }
+        }
+
+        // Recall other fields (if applicable)
+        if (client.firstName) {
+            document.getElementById('firstName').value = client.firstName;
+            document.getElementById('lastName').value = client.lastName;
+            document.getElementById('phoneNumber').value = client.phoneNumber;
+            document.getElementById('streetAddress').value = client.streetAddress;
+            document.getElementById('city').value = client.city;
+            document.getElementById('state').value = client.state;
+            document.getElementById('zipCode').value = client.zipCode;
+            document.getElementById('county').value = client.county;
+        }
+
+        // Recall speaking language
+        if (client.speakingLanguage) {
+            document.getElementById('speakingLanguage').value = client.speakingLanguage;
+        }
+    } else {
+        alert('Client not found');
+    }
+};
+    </script>
+    <script src="notes.js"></script>
+    <link rel="stylesheet" href="householdedit.css">
+</body>
+</html>
